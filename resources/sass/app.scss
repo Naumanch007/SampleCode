@@ -1,0 +1,21 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+
+.bg-image{
+  background: url("../../public/images/bg.jpg") fixed center center;
+  background-size: cover;
+}
+
+.bg-dark-custom{
+  background: rgba(33,37,41, 0.5);
+  &.custom-padding{
+    padding: 20px;
+  }
+}
