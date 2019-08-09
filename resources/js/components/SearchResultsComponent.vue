@@ -15,7 +15,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="studio in studios">
+                            <tr v-for="studio in studios" :class="(studio.pricePerformanceWinner == true || studio.achievementWinner == true)? 'bg-success text-dark': ''">
                                 <th>{{ studio.name }}</th>
                                 <th>{{ studio.time_24hours? 'Yes': 'No' }}</th>
                                 <th>{{ studio.grade }}/10</th>
@@ -38,8 +38,10 @@
                 type: Array,
             }
         },
-        mounted() {
-
+        data() {
+            return {
+                highestGrade: null
+            }
         }
     }
 </script>

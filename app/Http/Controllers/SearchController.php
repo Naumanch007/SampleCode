@@ -15,10 +15,9 @@ class SearchController extends Controller
     public function index()
     {
         $studioAccessor = new StudioAccessor();
-        $studios= $studioAccessor->updateStudioGrades($studioAccessor->getStudios());
         $coachingOptions = $studioAccessor->getCoachingOptions();
         $cityOptions = $studioAccessor->getStudioCities();
-        return view('search', ['studios' => $studios, 'coachingOptions' => $coachingOptions, 'cityOptions' => $cityOptions]);
+        return view('search', ['coachingOptions' => $coachingOptions, 'cityOptions' => $cityOptions]);
     }
 
     /**
@@ -26,10 +25,10 @@ class SearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function search()
+    public function search(Request $request)
     {
         $studioAccessor = new StudioAccessor();
-        $studios= $studioAccessor->updateStudioGrades($studioAccessor->getStudios());
+        $studios= $studioAccessor->updateStudioGrades($studioAccessor->getStudios($request->all()));
         echo json_encode($studios);
         return;
     }

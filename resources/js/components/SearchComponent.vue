@@ -10,26 +10,32 @@
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="cityOptions">City</label>
-                                <select  class="form-control" v-model="city" id="cityOptions" @change="updateTrigger(city,'city')">
+                                <select class="form-control" v-model="city" id="cityOptions"
+                                    @change="updateTrigger(city,'city')">
                                     <option v-for="cityOption in cityOptions">{{ cityOption.city}}</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="priceRangeOptions">Price Range</label>
-                                <select  class="form-control" v-model="price" id="priceRangeOptions" @change="updateTrigger(price,'price')">
-                                    <option v-for="priceRangeOption in priceRangeOptions">{{ priceRangeOption.label}}</option>
+                                <select class="form-control" v-model="price" id="priceRangeOptions"
+                                    @change="updateTrigger(price,'price')">
+                                    <option v-for="priceRangeOption in priceRangeOptions">{{ priceRangeOption.label}}
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="coachingOptions">Coaching</label>
-                                <select  class="form-control" v-model="coaching" id="coachingOptions" @change="updateTrigger(coaching,'coaching')">
-                                    <option v-for="coachingOption in coachingOptions" :value="coachingOption.short">{{ coachingOption.description}}</option>
+                                <select class="form-control" v-model="coaching" id="coachingOptions"
+                                    @change="updateTrigger(coaching,'coaching')">
+                                    <option v-for="coachingOption in coachingOptions" :value="coachingOption.short">
+                                        {{ coachingOption.description}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group text-right">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck" v-model="open24" @change="updateTrigger(open24, 'open')">
+                                <input class="form-check-input" type="checkbox" id="gridCheck" v-model="open24"
+                                    @change="updateTrigger(open24, 'open')">
                                 <label class="form-check-label" for="gridCheck">
                                     Open 24/7 ?
                                 </label>
@@ -67,20 +73,19 @@
             }
         },
         mounted() {
-            console.log(this.coachingOptions);
+
         },
         methods: {
-            updateTrigger(value, trigger){
-                console.log(value, trigger);
-                this.searchAPI();
-            },
-            searchAPI(){
-                axios
-                    .get('/api/search-api')
-                    .then(response => {
-                        debugger
-                        this.info = response.data
-                    });
+            updateTrigger(value, trigger) {
+                
+                let data = {
+                    'city': this.city,
+                    'price': this.price,
+                    'coaching': this.coaching,
+                    'open24': this.open24
+                };
+
+                this.$emit('searchAPI', data);
             }
         },
     }
